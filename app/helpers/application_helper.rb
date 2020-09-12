@@ -27,8 +27,12 @@ module ApplicationHelper
             link_display = 'Release Date'
         end
         
+        if(!@ratings_selected)
+            @ratings_selected = params[:ratings]
+        end
         
-        link_to link_display, :sort_column => sort_column, :sort_direction => sort_direction
+        
+        link_to link_display, :sort_column => sort_column, :sort_direction => sort_direction, :ratings => @ratings_selected
     end
     
 end
