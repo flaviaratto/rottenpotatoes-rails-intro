@@ -19,7 +19,7 @@ module ApplicationHelper
             sort_direction = "asc"
         end
         
-        
+        #What and how to display
         link_display = ''
         if(sort_column=='title')
             link_display = 'Movie Title'

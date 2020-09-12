@@ -23,8 +23,6 @@ class MoviesController < ApplicationController
     @ratings_selected = params[:ratings]
     if(@ratings_selected)
       @ratings_selected_keys = @ratings_selected.keys
-    else
-      @ratings_selected_keys = @all_ratings
     end
     
     
