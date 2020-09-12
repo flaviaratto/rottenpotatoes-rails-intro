@@ -16,10 +16,6 @@ class MoviesController < ApplicationController
     sort_column = params[:sort_column]
     sort_direction = params[:sort_direction]
     
-    sort_column ||='release_date'
-
-    sort_direction ||= "desc"
-
     @movies = Movie.order(sort_column +" "+ sort_direction)
     
   end

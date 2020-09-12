@@ -5,6 +5,7 @@ module ApplicationHelper
         if(params[:sort_column]==sort_column)
             return 'hilite'
         end
+        
     end
     
     #For sorting Movie Title and Release date
@@ -25,6 +26,7 @@ module ApplicationHelper
         elsif(sort_column == 'release_date')
             link_display = 'Release Date'
         end
+        
         
         link_to link_display, :sort_column => sort_column, :sort_direction => sort_direction
     end
