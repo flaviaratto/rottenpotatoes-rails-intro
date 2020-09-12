@@ -23,9 +23,10 @@ class MoviesController < ApplicationController
     @ratings_selected = params[:ratings]
     if(@ratings_selected)
       @ratings_selected_keys = @ratings_selected.keys
+    else
+      @ratings_selected_keys = @all_ratings
     end
     
-    @ratings_selected_keys||=@all_ratings
     
     #Filtering and sorting
     @movies = Movie.where(rating: @ratings_selected_keys).order(sort_column +" "+ sort_direction)
