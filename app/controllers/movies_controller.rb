@@ -15,19 +15,41 @@ class MoviesController < ApplicationController
     @all_ratings=Movie.uniq.pluck(:rating)
     
     sort_column = params[:sort_column]
-    sort_column ||='release_date'
+    #Session for sorting column
+    if(!sort_column and session[:sort_column])
+      sort_column = session[:sort_column]
+    else  
+      sort_column ||='release_date'
+    end
+    session[:sort_column] = sort_column
+    
     
     sort_direction = params[:sort_direction]
-    sort_direction ||= "desc"
+    #Session for sort direction
+    if(!sort_direction and session[:sort_direction])
+      sort_direction = session[:sort_direction]
+    else
+      sort_direction ||= "desc"
+    end
+    session[:sort_direction] = sort_direction
+    
     
     @ratings_selected = params[:ratings]
     if(@ratings_selected)
       @ratings_selected_keys = @ratings_selected.keys
     end
+    #Session for ratings
+    if(!@ratings_selected and session[:ratings] )
+      @ratings_selected = session[:ratings]
+      @ratings_selected_keys = session[:ratings].keys
+    else  
+      @ratings_selected_keys||=@all_ratings
+    end
+    session[:ratings] = @ratings_selected
     
-    @ratings_selected_keys||=@all_ratings
     
-    #Filtering and sorting
+    
+    #Final Filtering and sorting
     @movies = Movie.where(rating: @ratings_selected_keys).order(sort_column +" "+ sort_direction)
     
   end

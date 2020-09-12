@@ -6,6 +6,10 @@ module ApplicationHelper
             return 'hilite'
         end
         
+        if(session[:sort_column]==sort_column)
+            return 'hilite'
+        end
+        
     end
     
     #For sorting Movie Title and Release date
@@ -28,7 +32,7 @@ module ApplicationHelper
         end
         
         if(!@ratings_selected)
-            @ratings_selected = params[:ratings]
+            @ratings_selected = session[:ratings]
         end
         
         
