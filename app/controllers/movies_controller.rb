@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    @all_ratings=Movie.uniq.pluck(:rating)
     
     sort_column = params[:sort_column]
     sort_column ||='release_date'
@@ -19,7 +20,15 @@ class MoviesController < ApplicationController
     sort_direction = params[:sort_direction]
     sort_direction ||= "desc"
     
-    @movies = Movie.order(sort_column +" "+ sort_direction)
+    @ratings_selected = params[:ratings]
+    if(@ratings_selected)
+      @ratings_selected_keys = @ratings_selected.keys
+    end
+    
+    @ratings_selected_keys||=@all_ratings
+    
+    #Filtering and sorting
+    @movies = Movie.where(rating: @ratings_selected_keys).order(sort_column +" "+ sort_direction)
     
   end
 
