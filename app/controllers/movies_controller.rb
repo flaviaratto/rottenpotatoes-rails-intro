@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
     if(@ratings_selected)
       @ratings_selected_keys = @ratings_selected.keys
     end
-    
+    @ratings_selected_keys||=@all_ratings
     
     #Filtering and sorting
     @movies = Movie.where(rating: @ratings_selected_keys).order(sort_column +" "+ sort_direction)
